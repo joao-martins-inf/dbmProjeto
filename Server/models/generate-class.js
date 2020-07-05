@@ -11,6 +11,7 @@ function classGenerator() {
         fs.readFile(path, function (err, data) {
             let construtor = [];
             let enumerables = [];
+            let references = [];
             var string = JSON.parse(data.toString());
 
             Object.keys(string.properties).forEach(function (key, id, array) {
@@ -18,6 +19,10 @@ function classGenerator() {
 
                 if (string.required && !string.required.includes(key)) {
                     enumerables.push(({ name: key }));
+                }
+
+                if (string.references && !string.required.includes(key)) {
+                    references.push(({ name: key }));
                 }
             });
 
@@ -27,6 +32,7 @@ function classGenerator() {
                 constructorArguments: Object.keys(string.properties).join(),
                 classConstructor: construtor,
                 classEnumerables: enumerables,
+                referencesEnumerables: references,
                 dbname: config.dbname
             }
 

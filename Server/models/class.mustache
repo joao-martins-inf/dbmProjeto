@@ -17,6 +17,12 @@ class {{classTitle}} {
         {enumerable: false});
         {{/classEnumerables}} 
 
+        {{#referencesEnumerables}}
+        Object.defineProperty(this, "{{tableName}}", 
+        { enumerable: false, writable: true });
+        {{/referencesEnumerables}}
+
+
         Object.defineProperty(this,"{{classTitleLower}}_id",
         {enumerable: false, writable:true});
     }
