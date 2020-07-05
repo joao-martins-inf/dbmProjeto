@@ -1,0 +1,21 @@
+{
+    "title": "Turma",
+    "description": "Representa uma turma",
+    "type": "object",
+    "properties": {
+        "sigla": {
+            "description": "Name of the song",
+            "type": "string",
+            "maxLength": 3
+        },
+        "anoletivo": {
+            "description": "ano letivo",
+            "type": "integer",
+            "pattern": "^20([0-9]{2})\/20([0-9]{2})$"
+        }
+    },
+    "required": [
+        "sigla",
+        "anoletivo"
+    ]
+}

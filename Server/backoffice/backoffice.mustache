@@ -1,0 +1,223 @@
+var express = require('express');
+var router = express.Router();
+var fs = require('fs');
+
+{{#models}}
+var {{modelTitle}} = require('../Models/{{modelTitle}}.js');
+var schema{{modelTitle}} = require('../Schemas/{{modelTitle}}.json');
+
+router.get('/{{modelTitle}}', function (req, res) {
+    {{modelTitle}}.all((rows) => {
+        res.render('list', {
+            title: '{{modelTitle}}',
+            columns: Object.keys(new {{modelTitle}}()),
+            rows: rows.map(obj => {
+                return {
+                    properties: Object.keys(obj).map(key => obj[key]),
+                    actions: [{
+                        link: './{{modelTitle}}/Details/' + obj.id,
+                        image:{ src: '../../images/read.png', alt: 'read' },
+                        tooltip: 'Details'
+                    }, {
+                        link: './{{modelTitle}}/Edit/' + obj.id,
+                        image: { src: '../../images/edit.png', alt: 'edit' },
+                        tooltip: 'Edit'
+                    }, {
+                        link: '#',
+                        image: { src: '../../images/delete.png', alt: 'delete'},
+                        tooltip: 'Delete',
+                        events: [{
+                            name: "onclick",
+                            function: "remove",
+                            args: obj.id
+                        }]
+                    }]
+                }
+            })
+        })
+    });
+});
+
+router.get('/{{modelTitle}}/details/:id', function (req, res) {
+    {{modelTitle}}.get(req.params.id, function (row){
+        res.render('details', {
+            properties: function () {
+                var props = Object.getOwnPropertyNames(row);
+                var validProps = [];
+                props.forEach((prop) => {
+                    if(schema{{modelTitle}}.properties.hasOwnProperty(prop)){
+                        validProps.push({
+                            name: prop,
+                            image: schema{{modelTitle}}.properties[prop].presentationMode === "image" ? { value: row[prop] } : false,
+                            video: schema{{modelTitle}}.properties[prop].presentationMode === "video" ? { value: row[prop] } : false,
+                            text: schema{{modelTitle}}.properties[prop].presentationMode !== "image" && schema{{modelTitle}}.properties[prop].presentationMode !== "video" ? { value: row[prop]} : false
+                        });
+                    }
+                })
+                return validProps;
+            },
+            references: function () {
+                var refs = [];
+                if (schema{{modelTitle}}.references){
+                    schema{{modelTitle}}.references.forEach(function (ref){
+                        refs.push({
+                            labelRef: ref.label,
+                            model: ref.model,
+                            values: ref.relation === "M-M" ? '{{modelTitle}}' + req.params.id : row[(ref.model + "_id").toLowerCase()]
+                        });
+                    });
+                }
+                return refs;
+            },
+            get hasReferences(){
+                return this.references().length > 0;
+            }
+        })
+    })
+});
+
+router.get('/{{modelTitle}}/insert', function (req, res) {
+        res.render('insert', {
+            properties: function () {
+                var props = Object.getOwnPropertyNames(new {{modelTitle}});
+                var validProps = [];
+                props.forEach((prop) => {
+                    if(schema{{modelTitle}}.properties.hasOwnProperty(prop)){
+                        validProps.push({
+                            name: prop,
+                            type: function() {
+                                let val;
+                                switch(schema{{modelTitle}}.properties[prop].type){
+                                    case "integer":
+                                        val = "number";
+                                        break;
+                                    case "string":
+                                        val = "text";
+                                        break;
+                                    default:
+                                        val = "text";
+                                        break;
+                                }
+                                return val;
+                            },
+                            isRequired: schema{{modelTitle}}.required.includes(prop),
+                            constraints: function() {
+                                let constrains = [];
+                                let types = {
+                                    minimum: "min",
+                                    maximum: "max",
+                                    minLength: "minLength",
+                                    maxLength: "maxLength"
+                                }
+                                Object.keys(types).forEach(c => {
+                                    if(schema{{modelTitle}}.properties[prop][c] !== undefined) {
+                                        constrains.push({
+                                            name: types[c],
+                                            value: schema{{modelTitle}}.properties[prop][c]
+                                        })
+                                    }
+                                })
+                                return constrains;
+                            }
+                        });
+                    }
+                })
+                return validProps;
+            },
+            title: "{{modelTitle}}",
+            references: function () {
+                var refs = [];
+                if (schema{{modelTitle}}.references){
+                    schema{{modelTitle}}.references.forEach(function (ref){
+                        refs.push({
+                            labelRef: ref.label,
+                            model: ref.model,
+                            isManyToMany: (ref.relation === 'M-M')
+                        });
+                    });
+                }
+                return refs;
+            },
+            get hasReferences(){
+                return this.references().length > 0;
+            }
+        })
+});
+
+router.get('/{{modelTitle}}/edit/:id', function (req, res) {
+    {{modelTitle}}.get(req.params.id, function (row){
+        res.render('edit', {
+            properties: function () {
+                var props = Object.getOwnPropertyNames(row);
+                var validProps = [];
+                props.forEach((prop) => {
+                    if(schema{{modelTitle}}.properties.hasOwnProperty(prop)){
+                        validProps.push({
+                            name: prop,
+                            value: row[prop],
+                            type: function() {
+                                let val;
+                                switch(schema{{modelTitle}}.properties[prop].type){
+                                    case "integer":
+                                        val = "number";
+                                        break;
+                                    case "string":
+                                        val = "text";
+                                        break;
+                                    default:
+                                        val = "text";
+                                        break;
+                                }
+                                return val;
+                            },
+                            isRequired: schema{{modelTitle}}.required.includes(prop),
+                            constraints: function() {
+                                let constrains = [];
+                                let types = {
+                                    minimum: "min",
+                                    maximum: "max",
+                                    minLength: "minLength",
+                                    maxLength: "maxLength"
+                                }
+                                Object.keys(types).forEach(c => {
+                                    if(schema{{modelTitle}}.properties[prop][c] !== undefined) {
+                                        constrains.push({
+                                            name: types[c],
+                                            value: schema{{modelTitle}}.properties[prop][c]
+                                        })
+                                    }
+                                })
+                                return constrains;
+                            }
+                        });
+                    }
+                })
+                return validProps;
+            },
+            title: "{{modelTitle}}",
+            primaryKey: req.params.id,
+            references: function () {
+                var refs = [];
+                if (schema{{modelTitle}}.references){
+                    schema{{modelTitle}}.references.forEach(function (ref){
+                        refs.push({
+                            labelRef: ref.label,
+                            model: ref.model,
+                            isManyToMany: (ref.relation === 'M-M'),
+                            values: ref.relation === "M-M" ? '{{modelTitle}}' + req.params.id : row[(ref.model + "_id").toLowerCase()]
+                        });
+                    });
+                }
+                return refs;
+            },
+            get hasReferences(){
+                return this.references().length > 0;
+            }
+        })
+    })
+});
+
+
+{{/models}}
+
+module.exports = router;

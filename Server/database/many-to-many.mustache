@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS {{tableNameFirst}}_{{tableNameSecond}} (
+  {{columnNameFirst}}_id INTEGER,
+  {{columnNameSecond}}_id INTEGER,
+  PRIMARY KEY({{columnNameFirst}}_id, {{columnNameSecond}}_id),
+  FOREIGN KEY ({{columnNameFirst}}_id) REFERENCES {{tableNameFirst}}s({{columnNameFirst}}_id),
+  FOREIGN KEY ({{columnNameSecond}}_id) REFERENCES {{tableNameSecond}}s({{columnNameSecond}}_id)
+)

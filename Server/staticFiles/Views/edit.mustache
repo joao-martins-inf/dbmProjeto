@@ -1,0 +1,9 @@
+<body>
+  {{#properties}}
+    <div>
+      <label>{{name}}:</label>
+      <input type="{{type}}" name="{{name}}" {{#constraints}} {{property}} = "{{value}}" {{/constraints}} {{#isRequired}}required{{/isRequired}}>{{value}}</input>
+    </div>
+  {{/properties}}
+  </form>
+</body>

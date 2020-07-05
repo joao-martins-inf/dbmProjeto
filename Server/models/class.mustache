@@ -1,0 +1,48 @@
+const schema{{classTitle}} = require('../Schemas/{{classTitle}}.json'); 
+const jsf = require('json-schema-faker'); 
+const faker = require('faker'); 
+jsf.extend('faker', () => { return faker });
+var path = require('path');
+const database = require('../Database/sqlite-wrapper.js')(path.resolve(__dirname, '..', 'Database', '{{dbname}}'));
+
+
+class {{classTitle}} {
+    constructor ({{constructorArguments}}) {
+        {{#classConstructor}}
+        this.{{name}} = {{name}};
+        {{/classConstructor}}
+        
+        {{#classEnumerables}}
+        Object.defineProperty(this,"{{name}}",
+        {enumerable: false});
+        {{/classEnumerables}} 
+
+        Object.defineProperty(this,"{{classTitleLower}}_id",
+        {enumerable: false, writable:true});
+    }
+
+    static create() {     
+        return Object.assign(new {{classTitle}}(), jsf.generate(schema{{classTitle}})); 
+    } 
+
+    static all(callback){
+        database.where("SELECT * FROM {{classTitle}}s", [], {{classTitle}}, callback);
+    }
+
+    static get(id, callback){
+        database.get("SELECT * FROM {{classTitle}}s WHERE {{classTitleLower}}_id  = ?", [id],{{classTitle}}, callback);
+    }
+
+    static delete(id, callback){
+        database.run("DELETE FROM {{classTitle}}s WHERE {{classTitleLower}}_id = ?", [id], callback);
+    }
+
+    save(callback){
+        if(this.{{classTitle}}_id){
+            database.run("UPDATE {{classTitle}}s SET {{#classConstructor}} {{name}} = ?{{#comma}},{{/comma}} {{/classConstructor}} WHERE {{classTitleLower}}_id = ?", [{{#classConstructor}}this.{{name}}{{#comma}},{{/comma}} {{/classConstructor}}], callback);
+        } else {
+        database.run("INSERT INTO {{classTitle}}s ({{#classConstructor}}{{name}}{{#comma}},{{/comma}} {{/classConstructor}}) VALUES ({{#classConstructor}}?{{#comma}},{{/comma}}{{/classConstructor}})", [{{#classConstructor}}this.{{name}}{{#comma}},{{/comma}} {{/classConstructor}}], callback);
+        }
+    }
+}
+module.exports = {{classTitle}};

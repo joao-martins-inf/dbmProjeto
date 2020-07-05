@@ -1,0 +1,24 @@
+{
+  "title": "Song",
+  "description": "Represents a song",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the song",
+      "type": "string"
+    },
+    "artist": {
+      "description": "artist id that produces this songs",
+      "type": "integer"
+    },
+    "album": {
+      "description": "Album id that the song is integrated",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "name",
+    "artist",
+    "album"
+  ]
+}

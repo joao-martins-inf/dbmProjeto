@@ -1,0 +1,42 @@
+var express = require('express'); 
+var router = new express.Router(); 
+
+
+
+{{#models}}
+var {{modelTitle}} = require('../Models/{{modelTitle}}');
+{{/models}}
+
+{{#models}}
+router.post('/{{modelTitle}}', function(req, res){
+  let obj = Object.assign(new {{modelTitle}}(), req.body);
+    obj.save(result => res.json(result));
+});
+
+router.get('/{{modelTitle}}', function(req, res){
+    {{modelTitle}}.all(rows => res.json(rows));
+});
+
+router.get('/{{modelTitle}}/:id', function(req, res){
+    {{modelTitle}}.get(req.params.id, function (result) {
+        res.json(result);
+    });
+});
+
+router.put('/{{modelTitle}}/:id', function(req, res){
+    
+});
+
+router.delete('/{{modelTitle}}/:id', function(req, res){
+    {{modelTitle}}.delete(req.params.id, function (result) {
+        res.json(result);
+    });
+});
+
+{{/models}}
+
+
+module.exports = router;
+
+
+

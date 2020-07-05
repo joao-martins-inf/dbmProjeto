@@ -1,0 +1,29 @@
+{
+  "title": "Album",
+  "description": "A Album with many songs",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the product",
+      "type": "string"
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0
+    },
+    "release_date": {
+      "description": "The realease date of the album",
+      "type": "date"
+    }
+  },
+  "required": [
+    "name",
+    "price"
+  ],
+  "references": [
+    {
+      "model": "Artist",
+      "relation": "1-M"
+    }
+  ]
+}

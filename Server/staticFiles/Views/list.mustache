@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                {{#columns}}
+                    <th>{{.}}</th>
+                {{/columns}}
+            </tr>
+            {{#rows}}
+                <tr>
+                    {{#properties}}
+                        <td>{{.}}</td>
+                    {{/properties}}
+                {{#actions}}
+                    <td>
+                        <a href="{{link}}" title="{{tooltip}}" {{#events}}{{name}}="javascript:{{function}}({{args}})" {{/events}}>
+                            {{#image}}
+                                <img src="{{src}}" alt="{{alt}}" />
+                            {{/image}}
+                        </a>
+                    </td>
+                {{/actions}}
+                </tr>
+            {{/rows}}
+        </table>
+        <form action="./{{title}}/insert">
+            <input type="submit" value="Inserir {{title}}" />
+        </form>
+    </body>
+</html>

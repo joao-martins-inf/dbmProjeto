@@ -1,0 +1,14 @@
+{
+  "title": "Genre",
+  "description": "Genre from songs examples: pop,rock,rap,...",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the genre",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
