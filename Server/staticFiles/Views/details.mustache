@@ -1,10 +1,17 @@
 <html>
- <body>
- {{#properties}}
- <div>
- <label>{{name}}:</label>
- <label>{{value}}</label>
- </div>
- {{/properties}}
- </body>
+    <body>
+        {{#properties}}
+        <div>
+            <label>{{name}}:</label>
+            {{#image}}<img src='{{value}}' width="128" height="128"></img>{{/image}}
+            {{#video}}<iframe src='{{value}}'></iframe>{{/video}}
+            {{#text}}<label>{{value}}</label>{{/text}}
+
+        </div>
+        {{/properties}}
+        {{#references}}
+            <label>{{model}}:</label>
+            <label id="label{{model}}Value"></label>
+        {{/references}}
+    </body>
 </html>

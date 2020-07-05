@@ -1,9 +1,16 @@
 <body>
-  {{#properties}}
-    <div>
-      <label>{{name}}:</label>
-      <input type="{{type}}" name="{{name}}" {{#constraints}} {{property}} = "{{value}}" {{/constraints}} {{#isRequired}}required{{/isRequired}}>{{value}}</input>
-    </div>
-  {{/properties}}
-  </form>
+    <form action= "/api/{{title}}_method=put" method="POST" event.preventDefault();">
+        {{#properties}}
+            <div>
+                <label>{{name}}:</label>
+                <input type="{{type}}" name="{{name}}" value="{{value}}" {{#constraints}} {{name}}="{{value}}" {{/constraints}} {{#isRequired}}required{{/isRequired}}></input>
+            </div>
+        {{/properties}}
+        {{#references}}
+            <label>{{model}}:</label>
+            <div id="div{{model}}Value"></div>
+        {{/references}}
+        <input type="submit" onclick=" window.location.href = './{{title}}'";value="Save" />
+    </form>
 </body>
+</html>

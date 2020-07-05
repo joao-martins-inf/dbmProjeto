@@ -9,7 +9,7 @@ function generateBO() {
     var view = [];
 
     config.schemas.forEach(schema => {
-        models.push({ modelTitle: schema.name });
+        models.push({ modelTitle: schema.name, modelTitleLowerCase: schema.name.toLowerCase() });
         view = {
             models: models
         }

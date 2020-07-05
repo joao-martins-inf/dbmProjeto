@@ -15,11 +15,11 @@ router.get('/{{modelTitle}}', function (req, res) {
                 return {
                     properties: Object.keys(obj).map(key => obj[key]),
                     actions: [{
-                        link: './{{modelTitle}}/Details/' + obj.id,
+                        link: './{{modelTitle}}/Details/' + obj.{{modelTitleLowerCase}}_id,
                         image:{ src: '../../images/read.png', alt: 'read' },
                         tooltip: 'Details'
                     }, {
-                        link: './{{modelTitle}}/Edit/' + obj.id,
+                        link: './{{modelTitle}}/Edit/' + obj.{{modelTitleLowerCase}}_id,
                         image: { src: '../../images/edit.png', alt: 'edit' },
                         tooltip: 'Edit'
                     }, {
@@ -29,7 +29,7 @@ router.get('/{{modelTitle}}', function (req, res) {
                         events: [{
                             name: "onclick",
                             function: "remove",
-                            args: obj.id
+                            args: obj.{{modelTitleLowerCase}}_id
                         }]
                     }]
                 }

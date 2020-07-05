@@ -16,8 +16,8 @@ app.use(bp.urlencoded({ extended: true }));
 app.use(bp.json());
 
 
-app.use(routesBO);
-app.use(routesAPI);
+app.use('/backoffice', routesBO);
+app.use('/api/', routesAPI);
 
 app.use(express.static('public'));
 app.get("/", function (req, res) {

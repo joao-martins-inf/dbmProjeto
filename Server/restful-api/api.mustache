@@ -1,8 +1,6 @@
 var express = require('express'); 
 var router = new express.Router(); 
 
-
-
 {{#models}}
 var {{modelTitle}} = require('../Models/{{modelTitle}}');
 {{/models}}
@@ -23,8 +21,18 @@ router.get('/{{modelTitle}}/:id', function(req, res){
     });
 });
 
-router.put('/{{modelTitle}}/:id', function(req, res){
-    
+router.put('/{{modelTitle}}/:id', async function (req, res) {
+    var obj = Object.assign(new {{modelTitle}}(), req.body);
+
+    let promise = new Promise((res, rej) => {
+       {{modelTitle}}.get(req.params.id, function(result,err){
+            res(req.params.id);
+        });
+        setTimeout(() => res(), 1000);
+    });
+
+    obj.id = await promise;
+    obj.save(result => res.json(result));
 });
 
 router.delete('/{{modelTitle}}/:id', function(req, res){
