@@ -20,11 +20,14 @@ function classGenerator() {
                 if (string.required && !string.required.includes(key)) {
                     enumerables.push(({ name: key }));
                 }
-
-                if (string.references && !string.required.includes(key)) {
-                    references.push(({ name: key }));
-                }
             });
+
+            if (string.references != null) {
+                Object.keys(string.references).forEach(ref => {
+                    atrb = string.references[ref];
+                    references.push({ ReftableName: atrb.model.toLowerCase() });
+                });
+            }
 
             var view = {
                 classTitle: string.title,

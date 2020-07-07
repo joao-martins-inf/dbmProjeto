@@ -18,7 +18,7 @@ class {{classTitle}} {
         {{/classEnumerables}} 
 
         {{#referencesEnumerables}}
-        Object.defineProperty(this, "{{tableName}}", 
+        Object.defineProperty(this, "{{ReftableName}}_id", 
         { enumerable: false, writable: true });
         {{/referencesEnumerables}}
 
@@ -42,6 +42,17 @@ class {{classTitle}} {
     static delete(id, callback){
         database.run("DELETE FROM {{classTitle}}s WHERE {{classTitleLower}}_id = ?", [id], callback);
     }
+
+    {{#isManyToMany}}
+    static many (model, id, callback) {
+        let tablename = "{{classTitle}}".localeCompare(model) === -1 ? "{{classTitle}}_" + model : model + "_{{ReftableName}}";
+        database.where(`SELECT {{classTitle}}.*
+        FROM {{classTitle}}
+        INNER JOIN ${tablename} ON ${tablename}.{{classTitleLower}}_id = {{classTitleLower}}.id
+        WHERE ${tablename}.${model.toLowerCase()}_id = ?`, [id],
+        {{classTitleLower}}, callback);
+    }
+    {{/isManyToMany}}
 
     save(callback){
         if(this.{{classTitle}}_id){
