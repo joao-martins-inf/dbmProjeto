@@ -1,66 +1,66 @@
 {
-    "port": 8081,
-    "address": "localhost",
-    "appName": "Lab05",
-    "schemas": [
-        {
-            "name": "Aluno",
-            "path": "\\schemas\\Aluno.json"
-        },
-        {
-            "name": "Turma",
-            "path": "\\schemas\\Turma.json"
-        },
-        {
-            "name": "Album",
-            "path": "\\schemas\\Album.json"
-        },
-        {
-            "name": "Artist",
-            "path": "\\schemas\\Artist.json"
-        },
-        {
-            "name": "Genre",
-            "path": "\\schemas\\Genre.json"
-        },
-        {
-            "name": "Song",
-            "path": "\\schemas\\Song.json"
-        }
-    ],
-    "dbname": "labs.db",
-    "staticFiles": [
-        {
-            "originalPath": "\\database\\sqlite-wrapper.js",
-            "destinationPath": "\\Publish\\Database\\sqlite-wrapper.js"
-        },
-        {
-            "originalPath": "\\staticFiles\\Views\\details.mustache",
-            "destinationPath": "\\Publish\\Views\\details.mustache"
-        },
-        {
-            "originalPath": "\\staticFiles\\Views\\edit.mustache",
-            "destinationPath": "\\Publish\\Views\\edit.mustache"
-        },
-        {
-            "originalPath": "\\staticFiles\\Views\\insert.mustache",
-            "destinationPath": "\\Publish\\Views\\insert.mustache"
-        },
-        {
-            "originalPath": "\\staticFiles\\Views\\list.mustache",
-            "destinationPath": "\\Publish\\Views\\list.mustache"
-        },
-        {
-            "originalPath": "\\staticFiles\\Images\\delete.png",
-            "destinationPath": "\\Publish\\Public\\Images\\delete.png"
-        },
-        {
-            "originalPath": "\\staticFiles\\Images\\edit.png",
-            "destinationPath": "\\Publish\\Public\\Images\\edit.png"
-        },
-        {
-            "originalPath": "\\staticFiles\\Images\\read.png",
-            "destinationPath": "\\Publish\\Public\\Images\\read.png"
-        }
-    ]
+  "port": 8081,
+  "address": "localhost",
+  "appName": "Lab05",
+  "schemas": [
+    {
+      "name": "Aluno",
+      "path": "\\schemas\\Aluno.json"
+    },
+    {
+      "name": "Turma",
+      "path": "\\schemas\\Turma.json"
+    },
+    {
+      "name": "Actor",
+      "path": "\\schemas\\Actor.json"
+    },
+    {
+      "name": "Director",
+      "path": "\\schemas\\Director.json"
+    },
+    {
+      "name": "Genre",
+      "path": "\\schemas\\Genre.json"
+    },
+    {
+      "name": "Movie",
+      "path": "\\schemas\\Movie.json"
+    }
+  ],
+  "dbname": "labs.db",
+  "staticFiles": [
+    {
+      "originalPath": "\\database\\sqlite-wrapper.js",
+      "destinationPath": "\\Publish\\Database\\sqlite-wrapper.js"
+    },
+    {
+      "originalPath": "\\staticFiles\\Views\\details.mustache",
+      "destinationPath": "\\Publish\\Views\\details.mustache"
+    },
+    {
+      "originalPath": "\\staticFiles\\Views\\edit.mustache",
+      "destinationPath": "\\Publish\\Views\\edit.mustache"
+    },
+    {
+      "originalPath": "\\staticFiles\\Views\\insert.mustache",
+      "destinationPath": "\\Publish\\Views\\insert.mustache"
+    },
+    {
+      "originalPath": "\\staticFiles\\Views\\list.mustache",
+      "destinationPath": "\\Publish\\Views\\list.mustache"
+    },
+    {
+      "originalPath": "\\staticFiles\\Images\\delete.png",
+      "destinationPath": "\\Publish\\Public\\Images\\delete.png"
+    },
+    {
+      "originalPath": "\\staticFiles\\Images\\edit.png",
+      "destinationPath": "\\Publish\\Public\\Images\\edit.png"
+    },
+    {
+      "originalPath": "\\staticFiles\\Images\\read.png",
+      "destinationPath": "\\Publish\\Public\\Images\\read.png"
+    }
+  ]
 }

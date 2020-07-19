@@ -1,0 +1,33 @@
+{
+  "title": "Actor",
+  "description": "An Actor from a movie",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the actor",
+      "type": "string"
+    },
+    "age": {
+      "type": "number",
+      "minimum": 0
+    },
+    "email": {
+      "description": "Email do ator",
+      "type": "string",
+      "maxLength": 254,
+      "faker": "internet.email"
+    },
+    "morada": {
+      "description": "Morada do ator",
+      "type": "string",
+      "faker": "address.streetAddress"
+    }
+  },
+  "required": ["name", "age", "email"],
+  "references": [
+    {
+      "model": "Movie",
+      "relation": "M-M"
+    }
+  ]
+}

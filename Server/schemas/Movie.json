@@ -1,0 +1,16 @@
+{
+  "title": "Movie",
+  "description": "Represents a movie",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the movie",
+      "type": "string"
+    },
+    "release_date": {
+      "description": "data em que o filme foi lançado",
+      "type": "date"
+    }
+  },
+  "required": ["name", "release_date"]
+}

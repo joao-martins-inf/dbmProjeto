@@ -1,6 +1,6 @@
 {
   "title": "Genre",
-  "description": "Genre from songs examples: pop,rock,rap,...",
+  "description": "Genre from movies examples: action, scifi,...",
   "type": "object",
   "properties": {
     "name": {
@@ -8,7 +8,11 @@
       "type": "string"
     }
   },
-  "required": [
-    "name"
+  "required": ["name"],
+  "references": [
+    {
+      "model": "Movie",
+      "relation": "M-M"
+    }
   ]
 }

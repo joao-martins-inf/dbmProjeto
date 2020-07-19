@@ -1,0 +1,28 @@
+{
+  "title": "Director",
+  "description": "A Director from many movies",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "Name of the director",
+      "type": "string"
+    },
+    "email": {
+      "description": "director email",
+      "type": "string"
+    },
+    "age": {
+      "description": "director age",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "required": ["name", "email", "age"],
+  "references": [
+    {
+      "model": "Movie",
+      "relation": "1-M"
+    }
+  ]
+}
