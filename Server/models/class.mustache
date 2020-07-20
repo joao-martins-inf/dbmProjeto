@@ -45,12 +45,12 @@ class {{classTitle}} {
 
     {{#isManyToMany}}
     static many (model, id, callback) {
-        let tablename = "{{classTitle}}".localeCompare(model) === -1 ? "{{classTitle}}_" + model : model + "_{{ReftableName}}";
-        database.where(`SELECT {{classTitle}}.*
-        FROM {{classTitle}}
-        INNER JOIN ${tablename} ON ${tablename}.{{classTitleLower}}_id = {{classTitleLower}}.id
+        let tablename = "{{classTitle}}".localeCompare(model) === -1 ? "{{classTitle}}_" + model : model + "_{{classTitle}}";
+        database.where(`SELECT {{classTitle}}s.*
+        FROM {{classTitle}}s AS {{classTitleLower}}s
+        INNER JOIN ${tablename} ON ${tablename}.{{classTitleLower}}_id = {{classTitleLower}}s.{{classTitleLower}}_id
         WHERE ${tablename}.${model.toLowerCase()}_id = ?`, [id],
-        {{classTitleLower}}, callback);
+        {{classTitle}}, callback);
     }
     {{/isManyToMany}}
 

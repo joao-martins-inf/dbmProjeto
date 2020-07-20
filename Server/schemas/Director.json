@@ -18,11 +18,5 @@
       "maximum": 100
     }
   },
-  "required": ["name", "email", "age"],
-  "references": [
-    {
-      "model": "Movie",
-      "relation": "1-M"
-    }
-  ]
+  "required": ["name", "email", "age"]
 }

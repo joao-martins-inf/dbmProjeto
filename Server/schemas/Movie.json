@@ -12,5 +12,11 @@
       "type": "date"
     }
   },
-  "required": ["name", "release_date"]
+  "required": ["name", "release_date"],
+  "references": [
+    {
+      "model": "Director",
+      "relation": "1-M"
+    }
+  ]
 }

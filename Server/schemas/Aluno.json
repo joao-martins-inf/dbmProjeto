@@ -1,46 +1,42 @@
 {
-    "title": "Aluno",
-    "description": "Entidade Aluno",
-    "type": "object",
-    "properties": {
-        "numero": {
-            "description": "Numero do Aluno",
-            "type": "integer",
-            "pattern": "\\([0-9]{8}\\",
-            "unique": true
-        },
-        "nome": {
-            "description": "Nome do Aluno",
-            "type": "string",
-            "faker": "name.findName"
-        },
-        "email": {
-            "description": "Email do Aluno",
-            "type": "string",
-            "maxLength": 254,
-            "faker": "internet.email"
-        },
-        "morada": {
-            "description": "Morada do Aluno",
-            "type": "string",
-            "faker": "address.streetAddress"
-        },
-        "notafinal": {
-            "description": "Idade do Aluno",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 20
-        }
+  "title": "Aluno",
+  "description": "Entidade Aluno",
+  "type": "object",
+  "properties": {
+    "numero": {
+      "description": "Numero do Aluno",
+      "type": "integer",
+      "pattern": "\\([0-9]{8}\\",
+      "unique": true
     },
-    "required": [
-        "numero",
-        "nome",
-        "notafinal"
-    ],
-    "references": [
-        {
-            "model": "Turma",
-            "relation": "1-M"
-        }
-    ]
+    "nome": {
+      "description": "Nome do Aluno",
+      "type": "string",
+      "faker": "name.findName"
+    },
+    "email": {
+      "description": "Email do Aluno",
+      "type": "string",
+      "maxLength": 254,
+      "faker": "internet.email"
+    },
+    "morada": {
+      "description": "Morada do Aluno",
+      "type": "string",
+      "faker": "address.streetAddress"
+    },
+    "notafinal": {
+      "description": "Idade do Aluno",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20
+    }
+  },
+  "required": ["numero", "nome", "notafinal"],
+  "references": [
+    {
+      "model": "Turma",
+      "relation": "M-M"
+    }
+  ]
 }
