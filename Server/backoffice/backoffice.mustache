@@ -28,7 +28,7 @@ router.get('/{{modelTitle}}', function (req, res) {
                         tooltip: 'Delete',
                         events: [{
                             name: "onclick",
-                            function: "remove",
+                            function: "delete",
                             args: obj.{{modelTitleLowerCase}}_id
                         }]
                     }]

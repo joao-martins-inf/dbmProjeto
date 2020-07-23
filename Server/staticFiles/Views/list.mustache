@@ -2,6 +2,19 @@
     <head>
         <title>{{title}}</title>
     </head>
+    <script>
+    function delete(id){ 
+        var xhr = new XMLHttpRequest(); 
+        xhr.onreadystatechange = function() { 
+            if (this.readyState == 4 && this.status == 200) 
+            { 
+                location.reload(); 
+            }
+        }; 
+        xhr.open("DELETE", "/api/{{title}}/"+ id, true); 
+        xhr.send();
+    }
+    </script>
     <body>
         <table>
             <tr>

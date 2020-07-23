@@ -56,7 +56,7 @@ class {{classTitle}} {
 
     save(callback){
         if(this.{{classTitle}}_id){
-            database.run("UPDATE {{classTitle}}s SET {{#classConstructor}} {{name}} = ?{{#comma}},{{/comma}} {{/classConstructor}} WHERE {{classTitleLower}}_id = ?", [{{#classConstructor}}this.{{name}}{{#comma}},{{/comma}} {{/classConstructor}}], callback);
+            database.run("UPDATE {{classTitle}}s SET {{#classConstructor}} {{name}} = ?{{#comma}},{{/comma}} {{/classConstructor}} WHERE {{classTitleLower}}_id = ?", [{{#classConstructor}}this.{{name}}{{#comma}},{{/comma}} {{/classConstructor}},{{classTitle}}_id], callback);
         } else {
         database.run("INSERT INTO {{classTitle}}s ({{#classConstructor}}{{name}}{{#comma}},{{/comma}} {{/classConstructor}}) VALUES ({{#classConstructor}}?{{#comma}},{{/comma}}{{/classConstructor}})", [{{#classConstructor}}this.{{name}}{{#comma}},{{/comma}} {{/classConstructor}}], callback);
         }
